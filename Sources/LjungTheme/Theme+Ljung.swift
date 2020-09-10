@@ -86,9 +86,7 @@ private struct LjungHTMLFactory<Site: Website>: HTMLFactory {
             .head(for: page, on: context.site),
             .body(
                 .header(for: context, selectedSection: nil),
-                .wrapper(
-                    
-                ),
+                .wrapper(.contentBody(page.body)),
                 .footer(for: context.site)
             )
         )
@@ -170,13 +168,11 @@ private extension Node where Context == HTML.BodyContext {
                 .if(sectionIDs.count > 1,
                     .nav(
                         .ul(.forEach(sectionIDs) { section in
-                            .li(
-                                .a(
-                                    .class(section == selectedSection ? "selected" : ""),
-                                    .href(context.sections[section].path),
-                                    .text(context.sections[section].title)
-                                )
-                            )
+                            .li(.a(
+                                .class(section == selectedSection ? "selected" : ""),
+                                .href(context.sections[section].path),
+                                .text(context.sections[section].title)
+                                ))
                             })
                     )
                 )
@@ -212,24 +208,16 @@ private extension Node where Context == HTML.BodyContext {
     static func footer<T: Website>(for site: T) -> Node {
         return .footer(
             .p(
-                .text("Generated with ❤️ using "),
+                .text("Generated using "),
                 .a(
                     .text("Publish"),
-                    .href("https://github.com/johnsundell/publish")
+                    .href("https://github.com/")
                 )
             ),
-            .p(
-                .a(
-                    .text("RSS feed"),
-                    .href("/feed.rss")
-                ),
-                .text(" | "),
-                .a(
-                    .text("GitHub"),
-                    .href("https://github.com/w-ryan-jung"),
-                    .target(.blank)
-                )
-            )
+            .p(.a(
+                .text("RSS feed"),
+                .href("/feed.rss")
+                ))
         )
     }
 }

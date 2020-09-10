@@ -5,13 +5,13 @@ public extension Theme {
     
     static var ljung: Self {
         Theme(
-            htmlFactory: HTMLFactory(),
+            htmlFactory: LjungHTMLFactory(),
             resourcePaths: ["Resources/LjungTheme/styles.css"]
         )
     }
 }
 
-private struct HTMLFactory<Site: Website>: HTMLFactory {
+private struct LjungHTMLFactory<Site: Website>: HTMLFactory {
     func makeIndexHTML(for index: Index,
                        context: PublishingContext<Site>) throws -> HTML {
         HTML(

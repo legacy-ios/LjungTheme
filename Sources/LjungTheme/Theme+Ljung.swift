@@ -12,6 +12,7 @@ public extension Theme {
 }
 
 private struct LjungHTMLFactory<Site: Website>: HTMLFactory {
+    
     func makeIndexHTML(for index: Index,
                        context: PublishingContext<Site>) throws -> HTML {
         HTML(
